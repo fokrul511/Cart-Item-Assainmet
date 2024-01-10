@@ -3,7 +3,8 @@
 A new Flutter project.
 
 ## Getting Started
-![Alt text](image_url)
+![Cart page](https://github.com/fokrul511/Cart-Item-Assainmet/blob/main/image/home.png)
+![cart dialogue page](https://github.com/fokrul511/Cart-Item-Assainmet/blob/main/image/home2.png)
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
