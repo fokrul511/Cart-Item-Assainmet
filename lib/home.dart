@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 List<String> productName = ['Pullover', 'T-Shirt', 'Sport Dress'];
 List<String> productSize = [
@@ -30,12 +31,12 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          const Icon(
+        actions: const [
+          Icon(
             Icons.search,
             color: Colors.black,
           ),
-          const SizedBox(
+          SizedBox(
             width: 10,
           )
         ],
@@ -66,12 +67,10 @@ class MyHomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image(
-                              image:
-                                  NetworkImage(productImage[index].toString()),
-                              height: 100,
-                              width: 100,
-                              fit: BoxFit.cover,
+                            CachedNetworkImage(
+                              imageUrl: productImage[index].toString(),height: 100, width: 100,fit: BoxFit.cover,
+                              placeholder: (context, url) => Center(child: const CircularProgressIndicator()),
+                              errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
                             ),
                             Expanded(
                               child: Padding(
@@ -129,20 +128,26 @@ class MyHomePage extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Container(
-                                              height: 30,
-                                              width: 30,
-                                              decoration: const BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      blurRadius: 2,
-                                                      spreadRadius: 1,
-                                                    )
-                                                  ],
-                                                  color: Colors.white,
-                                                  shape: BoxShape.circle),
-                                              child: const Icon(CupertinoIcons.minus),
+                                            InkWell(
+
+                                              child: Container(
+                                                height: 30,
+                                                width: 30,
+                                                decoration: const BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.grey,
+                                                        blurRadius: 2,
+                                                        spreadRadius: 1,
+                                                      )
+                                                    ],
+                                                    color: Colors.white,
+                                                    shape: BoxShape.circle),
+                                                child: const Icon(CupertinoIcons.minus),
+                                              ),
+                                              onTap: () {
+                                                print('-');
+                                              },
                                             ),
                                             const SizedBox(width: 10),
                                             const Text(
@@ -152,20 +157,25 @@ class MyHomePage extends StatelessWidget {
                                                   fontWeight: FontWeight.w500),
                                             ),
                                             const SizedBox(width: 10),
-                                            Container(
-                                              height: 30,
-                                              width: 30,
-                                              decoration: const BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      blurRadius: 5,
-                                                      spreadRadius: 1,
-                                                    )
-                                                  ],
-                                                  color: Colors.white,
-                                                  shape: BoxShape.circle),
-                                              child: const Icon(CupertinoIcons.plus),
+                                            InkWell(
+                                              child: Container(
+                                                height: 30,
+                                                width: 30,
+                                                decoration: const BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.grey,
+                                                        blurRadius: 5,
+                                                        spreadRadius: 1,
+                                                      )
+                                                    ],
+                                                    color: Colors.white,
+                                                    shape: BoxShape.circle),
+                                                child: const Icon(CupertinoIcons.plus),
+                                              ),
+                                              onTap: () {
+                                                print('+');
+                                              },
                                             ),
                                           ],
                                         ),
@@ -228,7 +238,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (BuildContext context) => myDailogBox,
+                  builder: (BuildContext context) => dialogBox,
                 );
               },
               child: const Text('CHECK OUT'),
@@ -241,11 +251,11 @@ class MyHomePage extends StatelessWidget {
 }
 
 //start dilog
-var myDailogBox = Dialog(
+var dialogBox = Dialog(
   shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12.0)), //this right here
-  child: Container(
-    height: 250.0,
+  child: SizedBox(
+    height: 300.0,
     width: 300.0,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -280,9 +290,11 @@ var myDailogBox = Dialog(
         ),
         const Padding(padding: EdgeInsets.only(top: 30.0)),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding:  EdgeInsets.all(10.0),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Navigator.pop(context);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
               minimumSize: const Size(double.infinity, 44),
