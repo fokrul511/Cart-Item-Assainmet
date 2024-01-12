@@ -49,13 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    mySnakeBar(title, context) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(title),
-        duration: Duration(milliseconds: 300),
-        backgroundColor: Colors.green,
-      ));
-    }
+    // mySnakeBar(title, context) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     content: Text(title),
+    //     duration: Duration(milliseconds: 300),
+    //     backgroundColor: Colors.green,
+    //   ));
+    // }
 
     var dialogBox = Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -256,9 +256,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       ['quantity'] -= 1;
                                                   setState(() {});
                                                 }
-                                                mySnakeBar(
-                                                    'decress Your product price',
-                                                    context);
+                                                // mySnakeBar(
+                                                //     'decress Your product price',
+                                                //     context);
                                               },
                                             ),
                                             const SizedBox(width: 10),
@@ -300,9 +300,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ['quantity'] += 1;
                                                 setState(() {});
 
-                                                mySnakeBar(
-                                                    'Incress Your product price',
-                                                    context);
+                                                // mySnakeBar(
+                                                //     'Incress Your product price',
+                                                //     context);
                                               },
                                             ),
                                           ],
