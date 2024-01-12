@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const Padding(padding: EdgeInsets.only(top: 30.0)),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context); // Close the dialog
@@ -169,10 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: 100,
                               width: 100,
                               fit: BoxFit.cover,
-                              placeholder: (context, url) => Center(
-                                  child: const CircularProgressIndicator()),
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  Center(child: Icon(Icons.error)),
+                                  const Center(child: Icon(Icons.error)),
                             ),
                             Expanded(
                               child: Padding(
@@ -264,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             const SizedBox(width: 10),
                                             Text(
                                               '${allItemCard[index]['quantity'].toString()}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w500),
                                             ),
@@ -343,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.black.withOpacity(0.8)),
                 ),
                 Text(totalAmount.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.w500)),
