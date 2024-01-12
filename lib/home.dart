@@ -2,22 +2,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-List<String> productName = ['Pullover', 'T-Shirt', 'Sport Dress'];
-List<String> productSize = [
-  'M',
-  'M',
-  'L',
-];
-List<String> productColor = ['black', 'White', 'Pink'];
-List<int> productPrice = [
-  30,
-  40,
-  50,
-];
-List<String> productImage = [
-  'https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855',
-  'https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855',
-  'https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855',
+List allItemCard = [
+  {
+    "productName": "Pullover",
+    "productSize": "M",
+    "productColor": "black",
+    "productPrice": 30,
+    "productImage":
+        "https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855",
+    "quantity": 1
+  },
+  {
+    "productName": "T-Shirt",
+    "productSize": "M",
+    "productColor": "White",
+    "productPrice": 40,
+    "productImage":
+        "https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855",
+    "quantity": 1
+  },
+  {
+    "productName": "Sport Dress",
+    "productSize": "L",
+    "productColor": "Pink",
+    "productPrice": 50,
+    "productImage":
+        "https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855",
+    "quantity": 1
+  }
 ];
 
 class MyHomePage extends StatefulWidget {
@@ -28,30 +40,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //
-  int counter = 1;
-
-  void incrementProductPrice() {
-    setState(() {
-      counter++;
-    });
+  int get totalAmount {
+    return allItemCard.fold<int>(
+        0,
+        (total, product) =>
+            total + product['productPrice'] * product['quantity'] as int);
   }
 
-  void dicrementProductPrice() {
-    setState(() {
-      if (counter > 1) {
-        counter--;
-      }
-    });
-  }
-
-
-  //
   @override
   Widget build(BuildContext context) {
     mySnakeBar(title, context) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(title), duration: Duration(milliseconds: 300), backgroundColor: Colors.green,));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(title),
+        duration: Duration(milliseconds: 300),
+        backgroundColor: Colors.green,
+      ));
     }
 
     var dialogBox = Dialog(
@@ -147,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: productImage.length,
+              itemCount: allItemCard.length,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemBuilder: (context, index) {
@@ -161,7 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CachedNetworkImage(
-                              imageUrl: productImage[index].toString(),
+                              imageUrl:
+                                  allItemCard[index]['productImage'].toString(),
                               height: 100,
                               width: 100,
                               fit: BoxFit.cover,
@@ -183,7 +187,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          productName[index].toString(),
+                                          allItemCard[index]['productName']
+                                              .toString(),
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
@@ -201,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Row(
                                       children: [
                                         Text(
-                                          'Color: ${productColor[index].toString()}',
+                                          'Color: ${allItemCard[index]['productColor'].toString()}',
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
@@ -211,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           width: 20,
                                         ),
                                         Text(
-                                          'Size: ${productSize[index].toString()}',
+                                          'Size: ${allItemCard[index]['productSize'].toString()}',
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
@@ -244,13 +249,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     CupertinoIcons.minus),
                                               ),
                                               onTap: () {
-                                                mySnakeBar('decress Your product price -', context);
-                                                print('-');
+                                                if (allItemCard[index]
+                                                        ['quantity'] >
+                                                    1) {
+                                                  allItemCard[index]
+                                                      ['quantity'] -= 1;
+                                                  setState(() {});
+                                                }
+                                                mySnakeBar(
+                                                    'decress Your product price',
+                                                    context);
                                               },
                                             ),
                                             const SizedBox(width: 10),
-                                            const Text(
-                                              '1',
+                                            Text(
+                                              '${allItemCard[index]['quantity'].toString()}',
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w500),
@@ -274,8 +287,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     CupertinoIcons.plus),
                                               ),
                                               onTap: () {
-                                                mySnakeBar('Incress Your product price -', context);
-                                                print('+');
+                                                if (allItemCard[index]
+                                                        ['quantity'] ==
+                                                    4) {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          dialogBox);
+                                                }
+
+                                                allItemCard[index]
+                                                    ['quantity'] += 1;
+                                                setState(() {});
+
+                                                mySnakeBar(
+                                                    'Incress Your product price',
+                                                    context);
                                               },
                                             ),
                                           ],
@@ -283,7 +310,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Row(
                                           children: [
                                             Text(
-                                              "\$${productPrice[index].toString()}",
+                                              "\$${allItemCard[index]['productPrice'] * allItemCard[index]['quantity']}",
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 20,
@@ -315,7 +342,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Total Amount:',
                   style: TextStyle(color: Colors.black.withOpacity(0.8)),
                 ),
-                const Text('\$120',
+                Text(totalAmount.toString(),
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -336,12 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => dialogBox,
-                );
-              },
+              onPressed: () {},
               child: const Text('CHECK OUT'),
             ),
           )
