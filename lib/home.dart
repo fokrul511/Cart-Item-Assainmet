@@ -18,7 +18,7 @@ List allItemCard = [
     "productColor": "White",
     "productPrice": 40,
     "productImage":
-        "https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855",
+        "https://images.unsplash.com/photo-1622445275649-b1922cc3e837?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "quantity": 1
   },
   {
@@ -27,7 +27,7 @@ List allItemCard = [
     "productColor": "Pink",
     "productPrice": 50,
     "productImage":
-        "https://fullyfilmy.in/cdn/shop/files/Model_1_One_king.jpg?v=1689162855",
+        "https://images.unsplash.com/photo-1622470953794-aa9c70b0fb9d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "quantity": 1
   }
 ];
