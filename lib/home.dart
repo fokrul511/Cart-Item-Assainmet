@@ -342,7 +342,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Total Amount:',
                   style: TextStyle(color: Colors.black.withOpacity(0.8)),
                 ),
-                Text(totalAmount.toString(),
+                Text('\$${totalAmount.toString()}',
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
