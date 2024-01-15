@@ -49,82 +49,76 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // mySnakeBar(title, context) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //     content: Text(title),
-    //     duration: Duration(milliseconds: 300),
-    //     backgroundColor: Colors.green,
-    //   ));
-    // }
-
-    var dialogBox = Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-      child: SizedBox(
-        height: 300.0,
-        width: 300.0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                'Congratulation!',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Text(
-                'You have added',
-                style: TextStyle(color: Colors.black, fontSize: 16),
-              ),
-            ),
-            const Text(
-              '5',
-              style: TextStyle(color: Colors.black, fontSize: 16),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Text(
-                'T-shirt on your bag',
-                style: TextStyle(color: Colors.black, fontSize: 16),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(top: 30.0)),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context); // Close the dialog
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  minimumSize: const Size(double.infinity, 44),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  'OKAY',
-                  style: TextStyle(color: Colors.white, fontSize: 16.0),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+     dialogBox (int index){
+       return Dialog(
+         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+         child: SizedBox(
+           height: 300.0,
+           width: 300.0,
+           child: Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               const SizedBox(
+                 height: 10,
+               ),
+               const Padding(
+                 padding: EdgeInsets.all(10.0),
+                 child: Text(
+                   'Congratulation!',
+                   style: TextStyle(
+                       color: Colors.black,
+                       fontWeight: FontWeight.bold,
+                       fontSize: 20),
+                 ),
+               ),
+               const SizedBox(
+                 height: 20,
+               ),
+               const Padding(
+                 padding: EdgeInsets.all(5.0),
+                 child: Text(
+                   'You have added',
+                   style: TextStyle(color: Colors.black, fontSize: 16),
+                 ),
+               ),
+               const Text(
+                 '5',
+                 style: TextStyle(color: Colors.black, fontSize: 16),
+               ),
+               Padding(
+                 padding: EdgeInsets.all(5.0),
+                 child: Text(
+                   '${allItemCard[index]['productName'].toString()} on Your Bag',
+                   style: TextStyle(color: Colors.black, fontSize: 16),
+                 ),
+               ),
+               const Padding(padding: EdgeInsets.only(top: 30.0)),
+               Padding(
+                 padding: const EdgeInsets.all(10.0),
+                 child: ElevatedButton(
+                   onPressed: () {
+                     Navigator.pop(context); // Close the dialog
+                   },
+                   style: ElevatedButton.styleFrom(
+                     backgroundColor: Colors.red,
+                     minimumSize: const Size(double.infinity, 44),
+                     shape: const RoundedRectangleBorder(
+                       borderRadius: BorderRadius.all(
+                         Radius.circular(30),
+                       ),
+                     ),
+                   ),
+                   child: const Text(
+                     'OKAY',
+                     style: TextStyle(color: Colors.white, fontSize: 16.0),
+                   ),
+                 ),
+               )
+             ],
+           ),
+         ),
+       );
+     }
     return Scaffold(
       appBar: AppBar(
         actions: const [
@@ -141,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text(
               'My Bag',
@@ -293,7 +287,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   showDialog(
                                                       context: context,
                                                       builder: (context) =>
-                                                          dialogBox);
+                                                        dialogBox(index));
                                                 }
 
                                                 allItemCard[index]
